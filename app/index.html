@@ -1,25 +1,114 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Legends — GTA VI Trophy Guide &amp; Tracker</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">LL</div>
+      <div>
+        <h1>Leonida Legends</h1>
+        <p class="subtitle">The complete GTA VI trophy guide &amp; tracker — 55 PlayStation 5 trophies, one road to the platinum.</p>
+      </div>
+    </div>
+    <div class="platinum" id="platinum-box" aria-label="Platinum progress">
+      <div class="platinum-top">
+        <span class="platinum-name">Vice Got a Price!</span>
+        <span class="platinum-count" id="earned-count">0 / 55 earned</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <p class="platinum-note" id="progress-note">Tick trophies off as you earn them — progress is saved in your browser.</p>
+    </div>
+  </div>
+  <nav class="views" aria-label="Views">
+    <button class="view-btn" data-view="list" id="btn-view-list">Checklist</button>
+    <button class="view-btn" data-view="roadmap" id="btn-view-roadmap">Roadmap to Platinum</button>
+    <button class="view-btn" data-view="detail" id="btn-view-detail" hidden>Guide</button>
+  </nav>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<main>
+  <section id="view-list" class="view">
+    <div class="toolbar">
+      <label class="search-wrap">
+        <span class="visually-hidden">Search trophies</span>
+        <input type="search" id="search" placeholder="Search a trophy, mission or keyword…" autocomplete="off">
+      </label>
+      <div class="chips" id="kind-chips" role="group" aria-label="Filter by kind">
+        <button class="chip active" data-kind="all">All</button>
+        <button class="chip" data-kind="story">Story</button>
+        <button class="chip" data-kind="missable">Missable</button>
+        <button class="chip" data-kind="collectibles">Collectibles</button>
+        <button class="chip" data-kind="activities">Activities</button>
+      </div>
+      <label class="grade-wrap">Grade
+        <select id="grade-filter">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label class="toggle"><input type="checkbox" id="spoiler-toggle"> Spoiler-safe mode</label>
+      <label class="toggle"><input type="checkbox" id="earned-only"> Earned only</label>
+      <div class="io">
+        <button id="export-btn" type="button">Export progress</button>
+        <button id="import-btn" type="button">Import progress</button>
+        <input type="file" id="import-file" accept="application/json,.json" hidden>
+      </div>
+    </div>
+    <p class="list-meta" id="list-meta"></p>
+    <div class="grade-legend" aria-label="Trophy grades">
+      <span><i class="dot platinum"></i>1 Platinum</span>
+      <span><i class="dot gold"></i>2 Gold</span>
+      <span><i class="dot silver"></i>6 Silver</span>
+      <span><i class="dot bronze"></i>46 Bronze</span>
+      <span class="legend-note">12 story trophies are missable — they are locked to their chapter or mission.</span>
+    </div>
+    <ul class="trophy-list" id="trophy-list"></ul>
+    <p class="empty" id="empty-msg" hidden>No trophies match these filters.</p>
+  </section>
+
+  <section id="view-roadmap" class="view" hidden>
+    <h2>Roadmap to the platinum</h2>
+    <p class="roadmap-intro">One playthrough is enough. Roughly 200 hours in total (PowerPyx rates the set 4/10): about 60–80 hours for the story, the rest for activities, collectibles and the 100% checklist. Do the story first, pick up activities and collectibles as you go, and clean up after the credits.</p>
+    <div class="phases">
+      <article class="phase">
+        <h3>Phase 1 — The story: Chapters 1–4, then the final mission</h3>
+        <p>Play the story straight through. The 12 story trophies unlock automatically as you finish each chapter and each named mission — they are the only missable trophies on this list, because they are locked to their chapter or mission. Use mission replay if the game offers it, otherwise a new playthrough, if one ever fails to register.</p>
+        <ol class="phase-list" id="roadmap-story"></ol>
+      </article>
+      <article class="phase">
+        <h3>Phase 2 — Alongside the story: activities &amp; collectibles</h3>
+        <p>Do these as you travel, not in one late grind. Meditate at every spot you pass (the first spot, at Jason's house in Chapter 1, is the one trophy other guides flag as potentially missable — do it the moment it is offered). Try each activity type once, race, fish, shoot, hunt, rob, explore and register vehicles as the map opens up.</p>
+        <ul class="phase-list" id="roadmap-activities"></ul>
+      </article>
+      <article class="phase">
+        <h3>Phase 3 — Cleanup: 100% completion, then the platinum</h3>
+        <p>After the credits the 100% completion checklist opens. Nothing on it is missable. Finish the stunts (300 for the checklist), the challenges (70 of 80), the remaining collectibles and the stranger strands, and the gold for 100% pops — followed at once by the platinum, <strong>Vice Got a Price!</strong></p>
+        <ul class="phase-list" id="roadmap-cleanup"></ul>
+      </article>
+    </div>
+    <p class="roadmap-source">Roadmap built from the official trophy descriptions. Time and difficulty figures: PowerPyx — GTA 6 Trophy Guide &amp; Roadmap, <a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/">powerpyx.com</a>.</p>
+  </section>
+
+  <section id="view-detail" class="view" hidden>
+    <button class="back-btn" id="back-btn" type="button">&larr; Back to the checklist</button>
+    <article class="detail" id="detail-card"></article>
+  </section>
+</main>
+
+<footer>
+  <p>Leonida Legends — an unofficial fan guide. Grand Theft Auto, GTA and Vice City are trademarks of their owners; this guide is not affiliated with or endorsed by Rockstar Games. Trophy names and descriptions are the official PlayStation 5 list as published 2026-11-18 (via Exophase and PSNProfiles). Guides are written in our own words; sources are named beside each trophy.</p>
+  <p>Works fully offline — no network requests, progress saved in your browser (localStorage).</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
